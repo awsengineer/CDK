@@ -12,11 +12,34 @@ export default class ClusterConstruct extends Construct {
     const vpcCni = new blueprints.addons.VpcCniAddOn();
     const coreDns = new blueprints.addons.CoreDnsAddOn();
 
+    const karpenterAddonProps = {
+      provisionerSpecs: {
+        //'node.kubernetes.io/instance-type': ['m5.2xlarge'],
+        //'topology.kubernetes.io/zone': ['us-east-1c'],
+        'kubernetes.io/arch': ['amd64', 'arm64'],
+        'karpenter.sh/capacity-type': ['spot'], //, 'on-demand'],
+      },
+      subnetTags: {
+        "Name": "blueprint-construct-dev/blueprint-construct-dev-vpc/PrivateSubnet1",
+      },
+      securityGroupTags: {
+        "kubernetes.io/cluster/blueprint-construct-dev": "owned",
+      },
+      /*taints: [{
+        key: "workload",
+        value: "test",
+        effect: "NoSchedule",
+      }],*/
+      //amiFamily: "Bottlerocket",
+    };
+
+    const karpenterAddOn = new blueprints.addons.KarpenterAddOn(karpenterAddonProps);
+
     // comment
     const blueprint = blueprints.EksBlueprint.builder()
       .account(account)
       .region(region)
-      .addOns(vpcCni, coreDns)
+      .addOns(vpcCni, coreDns, karpenterAddOn)
       .teams()
       .build(scope, 'my-' + id + '-stack');
   };

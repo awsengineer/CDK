@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::539080165904:role/cdk-hnb659fds-deploy-role-539080165904-ap-southeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::539080165904:role/cdk-hnb659fds-cfn-exec-role-539080165904-ap-southeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-539080165904-ap-southeast-2/4d2a1e6b59c890e6a91b1513ea164d039310b309986484f7bf7534aa28779bae.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-539080165904-ap-southeast-2/cdf45f7bc3ef675f53198dbe29ac5644026020f79eb9140b12ca8addc23dee7a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -315,6 +315,60 @@
             "data": "myclusterstackNodegroupmyclusterstackngng3F26D7E1"
           }
         ],
+        "/my-cluster-stack/my-cluster-stack/karpenter-node-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackkarpenternoderole26C3986E"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/karpenter-instance-profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackkarpenterinstanceprofileC8C76E97"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-managed-policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackblueprintsaddonkarpentermanagedpolicyF1915DDB"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackblueprintsaddonkarpentersaConditionJson7F5D7EDE"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackblueprintsaddonkarpentersaRole9B19C1B9"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/manifest-blueprints-addon-karpenter-saServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackblueprintsaddonkarpentersamanifestblueprintsaddonkarpentersaServiceAccountResource80520ABF"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/OpenIdConnectProvider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackOpenIdConnectProviderD340FC63"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/chart-karpenter/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackchartkarpenter51B4AB61"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/manifest-default-provisioner/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackmanifestdefaultprovisionerAF71F0CB"
+          }
+        ],
         "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -565,6 +619,36 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "corednsaddOn"
+          }
+        ],
+        "/my-cluster-stack/karpenter-namespace-struct/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "karpenternamespacestructC6800395"
+          }
+        ],
+        "/my-cluster-stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+          }
+        ],
+        "/my-cluster-stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+          }
+        ],
+        "/my-cluster-stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/my-cluster-stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
           }
         ],
         "/my-cluster-stack/CDKMetadata/Default": [

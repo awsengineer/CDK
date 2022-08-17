@@ -1264,7 +1264,14 @@
          "Arn"
         ]
        },
-       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "myclusterstackkarpenternoderole26C3986E",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrapper\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
       ]
      ]
     },
@@ -1489,6 +1496,703 @@
     "aws:cdk:path": "my-cluster-stack/my-cluster-stack/Nodegroupmy-cluster-stack-ng-ng/Resource"
    }
   },
+  "myclusterstackkarpenternoderole26C3986E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": {
+         "Fn::Join": [
+          "",
+          [
+           "ec2.",
+           {
+            "Ref": "AWS::URLSuffix"
+           }
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/karpenter-node-role/Resource"
+   }
+  },
+  "myclusterstackkarpenterinstanceprofileC8C76E97": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "myclusterstackkarpenternoderole26C3986E"
+     }
+    ],
+    "InstanceProfileName": "KarpenterNodeInstanceProfile-552a9ea698cd70bfe0451cfe4cb85c18",
+    "Path": "/"
+   },
+   "DependsOn": [
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/karpenter-instance-profile"
+   }
+  },
+  "myclusterstackblueprintsaddonkarpentermanagedpolicyF1915DDB": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:CreateFleet",
+        "ec2:CreateLaunchTemplate",
+        "ec2:CreateTags",
+        "ec2:DeleteLaunchTemplate",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInstanceTypeOfferings",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeInstances",
+        "ec2:DescribeLaunchTemplates",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSpotPriceHistory",
+        "ec2:DescribeSubnets",
+        "ec2:RunInstances",
+        "ec2:TerminateInstances",
+        "iam:PassRole",
+        "pricing:GetProducts",
+        "ssm:GetParameter"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "",
+    "Path": "/"
+   },
+   "DependsOn": [
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-managed-policy/Resource"
+   }
+  },
+  "myclusterstackblueprintsaddonkarpentersaConditionJson7F5D7EDE": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "myclusterstackOpenIdConnectProviderD340FC63"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "myclusterstackOpenIdConnectProviderD340FC63"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:karpenter:blueprints-addon-karpenter\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "karpenternamespacestructC6800395",
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/ConditionJson/Resource/Default"
+   }
+  },
+  "myclusterstackblueprintsaddonkarpentersaRole9B19C1B9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "myclusterstackblueprintsaddonkarpentersaConditionJson7F5D7EDE",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "myclusterstackOpenIdConnectProviderD340FC63"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Ref": "myclusterstackblueprintsaddonkarpentermanagedpolicyF1915DDB"
+     }
+    ]
+   },
+   "DependsOn": [
+    "karpenternamespacestructC6800395",
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/Role/Resource"
+   }
+  },
+  "myclusterstackblueprintsaddonkarpentersamanifestblueprintsaddonkarpentersaServiceAccountResource80520ABF": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"blueprints-addon-karpenter\",\"namespace\":\"karpenter\",\"labels\":{\"aws.cdk.eks/prune-c8c14142066a3299ada3423aa435264604061a93f3\":\"\",\"app.kubernetes.io/name\":\"blueprints-addon-karpenter\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "myclusterstackblueprintsaddonkarpentersaRole9B19C1B9",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "myclusterstack6CB0A5D0"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "myclusterstackCreationRoleBFE7CCB0",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8c14142066a3299ada3423aa435264604061a93f3"
+   },
+   "DependsOn": [
+    "karpenternamespacestructC6800395",
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D",
+    "myclusterstackKubectlReadyBarrierB35AEBAB"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/blueprints-addon-karpenter-sa/manifest-blueprints-addon-karpenter-saServiceAccountResource/Resource/Default"
+   }
+  },
+  "myclusterstackOpenIdConnectProviderD340FC63": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "ThumbprintList": [
+     "9e99a48a9960b14926bb7f3b02e22da2b0ab7280"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "myclusterstack6CB0A5D0",
+      "OpenIdConnectIssuerUrl"
+     ]
+    }
+   },
+   "DependsOn": [
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/OpenIdConnectProvider/Resource/Default"
+   }
+  },
+  "myclusterstackchartkarpenter51B4AB61": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "myclusterstack6CB0A5D0"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "myclusterstackCreationRoleBFE7CCB0",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-karpenter",
+    "Chart": "karpenter",
+    "Version": "0.14.0",
+    "Wait": true,
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"clusterEndpoint\":\"",
+       {
+        "Fn::GetAtt": [
+         "myclusterstack6CB0A5D0",
+         "Endpoint"
+        ]
+       },
+       "\",\"clusterName\":\"",
+       {
+        "Ref": "myclusterstack6CB0A5D0"
+       },
+       "\",\"aws\":{\"defaultInstanceProfile\":\"KarpenterNodeInstanceProfile-552a9ea698cd70bfe0451cfe4cb85c18\"},\"serviceAccount\":{\"create\":false,\"name\":\"blueprints-addon-karpenter\",\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "myclusterstackblueprintsaddonkarpentersaRole9B19C1B9",
+         "Arn"
+        ]
+       },
+       "\"}}}"
+      ]
+     ]
+    },
+    "Namespace": "karpenter",
+    "Repository": "https://charts.karpenter.sh"
+   },
+   "DependsOn": [
+    "karpenternamespacestructC6800395",
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D",
+    "myclusterstackKubectlReadyBarrierB35AEBAB",
+    "vpccniaddOn"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/chart-karpenter/Resource/Default"
+   }
+  },
+  "myclusterstackmanifestdefaultprovisionerAF71F0CB": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn"
+     ]
+    },
+    "Manifest": "[{\"apiVersion\":\"karpenter.sh/v1alpha5\",\"kind\":\"Provisioner\",\"metadata\":{\"name\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c82e8c09b60c3c160f154b8fb24a8ab5dc19689799\":\"\"}},\"spec\":{\"requirements\":[{\"key\":\"kubernetes.io/arch\",\"operator\":\"In\",\"values\":[\"amd64\",\"arm64\"]},{\"key\":\"karpenter.sh/capacity-type\",\"operator\":\"In\",\"values\":[\"spot\"]}],\"taints\":[],\"provider\":{\"subnetSelector\":{\"Name\":\"blueprint-construct-dev/blueprint-construct-dev-vpc/PrivateSubnet1\"},\"securityGroupSelector\":{\"kubernetes.io/cluster/blueprint-construct-dev\":\"owned\"}},\"ttlSecondsAfterEmpty\":30}}]",
+    "ClusterName": {
+     "Ref": "myclusterstack6CB0A5D0"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "myclusterstackCreationRoleBFE7CCB0",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c82e8c09b60c3c160f154b8fb24a8ab5dc19689799"
+   },
+   "DependsOn": [
+    "myclusterstackvpcIGWBDBADE15",
+    "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4",
+    "myclusterstackvpcPrivateSubnet1RouteTableB0507898",
+    "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16",
+    "myclusterstackvpcPrivateSubnet1Subnet9828FB0E",
+    "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA",
+    "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646",
+    "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4",
+    "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE",
+    "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862",
+    "myclusterstackvpcPrivateSubnet3RouteTableB14D0228",
+    "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D",
+    "myclusterstackvpcPrivateSubnet3SubnetEC91C399",
+    "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D",
+    "myclusterstackvpcPublicSubnet1EIP71FE48B9",
+    "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F",
+    "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD",
+    "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081",
+    "myclusterstackvpcPublicSubnet1Subnet857BCD82",
+    "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F",
+    "myclusterstackvpcPublicSubnet2EIPCC28C7BE",
+    "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB",
+    "myclusterstackvpcPublicSubnet2RouteTable7193415A",
+    "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF",
+    "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA",
+    "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E",
+    "myclusterstackvpcPublicSubnet3EIPF9E978F9",
+    "myclusterstackvpcPublicSubnet3NATGateway76F73C64",
+    "myclusterstackvpcPublicSubnet3RouteTable46FFB236",
+    "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0",
+    "myclusterstackvpcPublicSubnet3Subnet67B64F45",
+    "myclusterstackvpc8A11360F",
+    "myclusterstackvpcVPCGWF32C8F3D",
+    "myclusterstackchartkarpenter51B4AB61",
+    "myclusterstackKubectlReadyBarrierB35AEBAB"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/my-cluster-stack/manifest-default-provisioner/Resource/Default"
+   }
+  },
   "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
    "Type": "AWS::CloudFormation::Stack",
    "Properties": {
@@ -1602,10 +2306,166 @@
     "aws:cdk:path": "my-cluster-stack/coredns-addOn"
    }
   },
+  "karpenternamespacestructC6800395": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn"
+     ]
+    },
+    "Manifest": "[{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"name\":\"karpenter\",\"labels\":{\"aws.cdk.eks/prune-c8f4e06650a29f6a88bfedc7c69a9850409d14bfd4\":\"\"}}}]",
+    "ClusterName": {
+     "Ref": "myclusterstack6CB0A5D0"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "myclusterstackCreationRoleBFE7CCB0",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8f4e06650a29f6a88bfedc7c69a9850409d14bfd4",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "myclusterstackKubectlReadyBarrierB35AEBAB"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/karpenter-namespace-struct/Resource/Default"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-539080165904-ap-southeast-2",
+     "S3Key": "494e82802f093e633e580188c7937aef9d6ee0ad4a788d58c647e6bea26d2915.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs14.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.494e82802f093e633e580188c7937aef9d6ee0ad4a788d58c647e6bea26d2915",
+    "aws:asset:property": "Code"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-539080165904-ap-southeast-2",
+     "S3Key": "a97987a1729ad440a42cac8aa979b932696afb2dc47dec373aad1a333a1cdbfc.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs14.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-cluster-stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.a97987a1729ad440a42cac8aa979b932696afb2dc47dec373aad1a333a1cdbfc",
+    "aws:asset:property": "Code"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1VQ0WrDMAz8lr4r3trB9hzCKGWsC8no63AcdXWT2MGWGkrIv89J1qUDg+4O+XTSRjy9iPVKdj5SZRXVuhB9TlJVEKSvHtVG9IdWQXI0hzSBlItaq5wLgzRqC8osE37KosZFX7TYe6u0JG3NX/MIXnfpWPaStpKwk1dInb4EuBjvDKEL+NYwJ/llMYWspwYNQY6Knabr1llupwz3wgBYedEnNftgB3HnY6YTvHExmaN/l0Yf0RPsbYnfN49/JC5LawbQshF9ZudFp5racJQp2YyGATL0lp0KPWGgbRYavtzhD6aW50uORx/AhIHi7B8u62cR3uPq7LWOHBvSDYpsrj+faY5ptQEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1VRYWvCMBD9LX6P2XSwfS5luG5MSzv8OtL0rNE2KcmlIqX/fWc7jULg3j1eXt5dlvzljS9m4uTmsjzOa1XwPkchj4yo3x7kkvfbVrJ4p7dpzFJf1ErmvtCAFy6gzHiEH1HUEPjARc4ZqQQqo2/iC3hP0ktZC1wJhJM4s9SqjmAwTjSCJXwVTEn+uwgp674BjSwH6a3C88oa344Z7omBwdHxPq69IzsWnVzkcc++fDGag/sWWu3AIVubEqqrR2hysJ2SEElpPL22aUEnZWy0BompNZ0qyfYD6ibeCzsGj8rS6IEp0fA+M9Nexpoa2uE4SECJdii0BLLaKdJQHFFBGQQPxDCwDJzxVpIrTWSa0NIjd3jjsfVjnE837X763cdbtwHonwBJUSldDUzT9PzgnrrFK6fzPDs4peaW5lcN8GyqfxV6zalCAgAA"
    },
    "Metadata": {
     "aws:cdk:path": "my-cluster-stack/CDKMetadata/Default"
