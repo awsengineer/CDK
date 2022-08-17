@@ -1,0 +1,3 @@
+my-eks-blueprints/node_modules/*
+mycdktest/node_modules/*
+karpenter-project/node_modules/*

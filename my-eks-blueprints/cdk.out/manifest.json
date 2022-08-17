@@ -1,0 +1,592 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "my-cluster-stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "my-cluster-stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "my-cluster-stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://539080165904/ap-southeast-2",
+      "properties": {
+        "templateFile": "my-cluster-stack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::539080165904:role/cdk-hnb659fds-deploy-role-539080165904-ap-southeast-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::539080165904:role/cdk-hnb659fds-cfn-exec-role-539080165904-ap-southeast-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-539080165904-ap-southeast-2/4d2a1e6b59c890e6a91b1513ea164d039310b309986484f7bf7534aa28779bae.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "my-cluster-stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::539080165904:role/cdk-hnb659fds-lookup-role-539080165904-ap-southeast-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "my-cluster-stack.assets"
+      ],
+      "metadata": {
+        "/my-cluster-stack/my-cluster-stack-vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpc8A11360F"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1Subnet857BCD82"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1RouteTableC06C9EDD"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1RouteTableAssociation395E6081"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1DefaultRoute99F7D71D"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1EIP71FE48B9"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet1NATGatewayD681AA9F"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2SubnetD3CCC8BA"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2RouteTable7193415A"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2RouteTableAssociationC9E1D8BF"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2DefaultRouteCFFB873F"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2EIPCC28C7BE"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet2NATGateway2DEDB6FB"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3Subnet67B64F45"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3RouteTable46FFB236"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3RouteTableAssociationBFB69DB0"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3DefaultRouteD21D996E"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3EIPF9E978F9"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PublicSubnet3/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPublicSubnet3NATGateway76F73C64"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet1Subnet9828FB0E"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet1RouteTableB0507898"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet1RouteTableAssociation050EFC16"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet1DefaultRouteD6B20DB4"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet2Subnet2BDE2EEE"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet2RouteTableD6D0C646"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet2RouteTableAssociationD3FCCEF4"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet2DefaultRouteA9535CAA"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet3SubnetEC91C399"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet3RouteTableB14D0228"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet3RouteTableAssociationA3D6D76D"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcPrivateSubnet3DefaultRoute961C8862"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcIGWBDBADE15"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack-vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackvpcVPCGWF32C8F3D"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackRole2071B68A"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackControlPlaneSecurityGroup56CE95BA"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackCreationRoleBFE7CCB0"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackCreationRoleDefaultPolicyC882A600"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstack6CB0A5D0"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackKubectlReadyBarrierB35AEBAB"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/ClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackClusterNameF8F6DEAE"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/MastersRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackMastersRole6F1CCD12"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackAwsAuthmanifest268CF637"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackConfigCommandF5E175AD"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackGetTokenCommand51D5AD8F"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Nodegroupmy-cluster-stack-ng-ng/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackNodegroupmyclusterstackngngNodeGroupRoleBE51526D"
+          }
+        ],
+        "/my-cluster-stack/my-cluster-stack/Nodegroupmy-cluster-stack-ng-ng/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackNodegroupmyclusterstackngng3F26D7E1"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/myclusterstackawscdkawseksClusterResourceProviderframeworkonEvent2FACE18BArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackawscdkawseksClusterResourceProviderframeworkonEvent2FACE18BArn"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-myclusterstackCreationRoleCEF93506Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackCreationRoleCEF93506Arn"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleFCDC14AE"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubectlLayer600207B5"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myclusterstackawscdkawseksKubectlProviderframeworkonEvent8072C259Arn"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackD6FA3C0CArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackD6FA3C0CArn"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackCreationRoleCEF93506Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackCreationRoleCEF93506Arn"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackmyclusterstackvpcPrivateSubnet1Subnet527E845ERef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackmyclusterstackvpcPrivateSubnet1Subnet527E845ERef"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackmyclusterstackvpcPrivateSubnet2SubnetBF19C7CFRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackmyclusterstackvpcPrivateSubnet2SubnetBF19C7CFRef"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackmyclusterstackvpcPrivateSubnet3SubnetD10FF39CRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackmyclusterstackvpcPrivateSubnet3SubnetD10FF39CRef"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-myclusterstackD6FA3C0CClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetomyclusterstackD6FA3C0CClusterSecurityGroupId"
+          }
+        ],
+        "/my-cluster-stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/my-cluster-stack/vpc-cni-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpccniaddOn"
+          }
+        ],
+        "/my-cluster-stack/coredns-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "corednsaddOn"
+          }
+        ],
+        "/my-cluster-stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/my-cluster-stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/my-cluster-stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "my-cluster-stack"
+    }
+  }
+}
