@@ -1,3 +1,6 @@
 my-eks-blueprints/node_modules/*
+my-eks-blueprints/cdk.out/*
 mycdktest/node_modules/*
+mycdktest/cdk.out/*
 karpenter-project/node_modules/*
+karpenter-project/cdk.out/*
